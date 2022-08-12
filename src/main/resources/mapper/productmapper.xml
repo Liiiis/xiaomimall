@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.guet.xiaomimall.mapper.productmapper">
+    <insert id="addproduct">
+        INSERT INTO eproducts(number,name,price,cost,stock,status,category,path) VALUE(#{number},#{name},#{price},#{cost},#{stock},#{status},#{category},#{path})
+    </insert>
+
+
+    <select id="selectall" resultType="cn.edu.guet.xiaomimall.bean.product">
+        select * from eproducts
+    </select>
+    <select id="selectbyid" resultType="cn.edu.guet.xiaomimall.bean.product">
+        select * from eproducts where id=#{id}
+    </select>
+    <select id="selectvague" resultType="cn.edu.guet.xiaomimall.bean.product">
+        SELECT * FROM eproducts WHERE id LIKE '%${msg}%' OR name LIKE '%${msg}%' OR price LIKE '%${msg}%' OR cost LIKE '%${msg}%' OR status LIKE '%${msg}%' OR category LIKE '%${msg}%'
+    </select>
+</mapper>

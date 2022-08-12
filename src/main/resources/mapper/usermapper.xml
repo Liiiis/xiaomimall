@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.guet.xiaomimall.mapper.usermapper">
+
+    <insert id="adduser">
+        INSERT INTO user(name,phone,email,sex) VALUE(#{name},#{phone},#{email},#{sex})
+    </insert>
+    <update id="updata">
+        UPDATE user SET name=#{name},phone=#{phone},email=#{email} WHERE id=#{id}
+    </update>
+    <delete id="deluser">
+        DELETE FROM user WHERE id = #{id}
+    </delete>
+    <select id="selectuserall" resultType="cn.edu.guet.xiaomimall.bean.user">
+        select * from user
+    </select>
+    <select id="selectbyid" resultType="cn.edu.guet.xiaomimall.bean.user">
+        select * from user where id=#{id}
+    </select>
+    <select id="selectvague" resultType="cn.edu.guet.xiaomimall.bean.user">
+        SELECT * FROM user WHERE id LIKE '%${msg}%' OR name LIKE '%${msg}%' OR phone LIKE '%${msg}%' OR email LIKE '%${msg}%' OR sex LIKE '%${msg}%'
+    </select>
+</mapper>
