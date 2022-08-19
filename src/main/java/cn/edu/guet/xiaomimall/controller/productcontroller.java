@@ -24,16 +24,14 @@ public class productcontroller {
     @Autowired
     private productservice productservice;
 
-    @GetMapping("/selectallp")
+    @GetMapping("/selectallp")  //查询全部
     public List<product> selectallp(){
         List<product> selectap = productservice.selectall();
-        System.out.println(selectap);
         return selectap;
     }
 
     @GetMapping("/selectbyid")
     public HttpResult selectbyid(int id){
-        System.out.println(id);
         product selectbyid = productservice.selectbyid(id);
         return HttpResult.ok(selectbyid);
     }
@@ -41,7 +39,6 @@ public class productcontroller {
     @GetMapping("/selectvague")
     public List<product> selectvague(String msg){
         List<product> selectvague = productservice.selectvague(msg);
-        System.out.println(selectvague);
         return selectvague;
     }
 
@@ -85,4 +82,11 @@ public class productcontroller {
             return "添加失败";
         }
     }
+
+    @GetMapping("/selectphoneten")
+    public List<product> selectrandom(@RequestParam String phone){
+        List<product> selectrandom = productservice.selectrandom(phone);
+        return selectrandom;
+    }
+
 }

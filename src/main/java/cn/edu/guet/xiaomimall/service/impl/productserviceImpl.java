@@ -45,5 +45,16 @@ public class productserviceImpl implements productservice {
         return add;
     }
 
+    @Override
+    public List<product> selectrandom(String phone) {
+        List<product> selectrandom = productmapper.selectrandom(phone);
+        return selectrandom;
+    }
+
+    @Override
+    public int updata(String name, int num) {
+        return productmapper.updata(name,num);
+    }
+
 
 }

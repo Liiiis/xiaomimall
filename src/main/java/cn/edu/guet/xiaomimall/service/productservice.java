@@ -16,4 +16,6 @@ public interface productservice {
     product selectbyid(int id);
     List<product> selectvague(String msg);
     int addproduct(product product);
+    List<product> selectrandom(String phone);//随机选取
+    int updata(String name,int num);
 }

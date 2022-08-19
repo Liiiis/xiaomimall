@@ -15,7 +15,9 @@ import java.util.List;
 @Mapper
 public interface productmapper {
   List<product> selectall();
-  product selectbyid(int id);
+  product selectbyid(int id);//根据id
   List<product> selectvague(String msg);
   int addproduct(product product);
+  List<product> selectrandom(String phone);//随机选取
+  int updata(String name,int num);
 }

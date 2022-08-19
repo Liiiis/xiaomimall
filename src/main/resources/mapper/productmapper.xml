@@ -4,6 +4,9 @@
     <insert id="addproduct">
         INSERT INTO eproducts(number,name,price,cost,stock,status,category,path) VALUE(#{number},#{name},#{price},#{cost},#{stock},#{status},#{category},#{path})
     </insert>
+    <update id="updata">
+        UPDATE eproducts SET stock = (stock-#{num})  WHERE name=#{name}
+    </update>
 
 
     <select id="selectall" resultType="cn.edu.guet.xiaomimall.bean.product">
@@ -14,5 +17,8 @@
     </select>
     <select id="selectvague" resultType="cn.edu.guet.xiaomimall.bean.product">
         SELECT * FROM eproducts WHERE id LIKE '%${msg}%' OR name LIKE '%${msg}%' OR price LIKE '%${msg}%' OR cost LIKE '%${msg}%' OR status LIKE '%${msg}%' OR category LIKE '%${msg}%'
+    </select>
+    <select id="selectrandom" resultType="cn.edu.guet.xiaomimall.bean.product">
+        SELECT * FROM eproducts where category=#{category} ORDER BY RAND() LIMIT 10  ;
     </select>
 </mapper>
