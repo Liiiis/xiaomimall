@@ -59,8 +59,6 @@ public class usercontroller {
     @PostMapping("/updatauser")
     public String updatauser(@RequestBody user user){
         int updatauser= userservice.updata(user);
-        System.out.println(user);
-        System.out.println(updatauser);
         if (updatauser>0){
             return "修改成功";
         }else {

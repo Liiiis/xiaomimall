@@ -20,7 +20,6 @@ public class logincontroller {
     @PostMapping("/login")
     public admin test(@RequestBody admin admin){
         admin a = loginservice.login(admin);
-        System.out.println(a);
         if (a!=null){
             return a;
         }else {

@@ -8,6 +8,9 @@
     <delete id="delete">
         delete from shopingcar
     </delete>
+    <delete id="deletebyid">
+        delete from shopingcar where id=#{id}
+    </delete>
     <select id="getshoppingcar" resultType="cn.edu.guet.xiaomimall.bean.shopingcar">
         select * from shopingcar
     </select>

@@ -17,4 +17,5 @@ public interface shopingcarmapper {
     int addshopcar(shopingcar shopingcar);
     List<shopingcar> getshoppingcar();
     int delete();
+    int deletebyid(int id);
 }

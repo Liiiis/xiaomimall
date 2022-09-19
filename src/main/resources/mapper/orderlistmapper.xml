@@ -4,4 +4,38 @@
     <insert id="addorder">
         INSERT INTO orderlist(ordernumber,sumPrice,shoppingcar) VALUE(#{ordernumber},#{sumPrice},#{shoppingcar})
     </insert>
+    <update id="updataorder">
+        UPDATE orderlist SET ordernumber=#{ordernumber},sumPrice=#{sumPrice},shoppingcar=#{shoppingcar} WHERE id=#{id}
+    </update>
+    <delete id="delorder">
+        delete
+        from orderlist
+        where ordernumber=#{ordernumber};
+    </delete>
+    <select id="selectsumPrice" resultType="cn.edu.guet.xiaomimall.bean.datasale">
+        SELECT SUM(sumPrice)            AS value,
+               DATE_FORMAT(ctime, '%m-%d') AS name
+        FROM orderlist
+        GROUP BY name
+    </select>
+    <select id="seleceorderlist" resultType="cn.edu.guet.xiaomimall.bean.orderlist">
+        SELECT * from orderlist
+    </select>
+    <select id="selectbyidorder" resultType="cn.edu.guet.xiaomimall.bean.orderlist">
+        select * from orderlist where id=#{id}
+    </select>
+    <select id="selectvague" resultType="cn.edu.guet.xiaomimall.bean.orderlist">
+        SELECT * FROM orderlist WHERE id LIKE '%${msg}%' OR ordernumber LIKE '%${msg}%' OR sumPrice LIKE '%${msg}%' OR shoppingcar LIKE '%${msg}%' OR ctime LIKE '%${msg}%' LIMIT #{curPage},#{pageSize}
+    </select>
+    <select id="getpageorderlist" resultType="cn.edu.guet.xiaomimall.bean.orderlist">
+        select * from orderlist LIMIT #{curPage},#{pageSize}
+    </select>
+    <select id="totalorlist" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM orderlist
+    </select>
+    <select id="selectvaguetotal" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM orderlist WHERE id LIKE '%${msg}%' OR ordernumber LIKE '%${msg}%' OR sumPrice LIKE '%${msg}%' OR shoppingcar LIKE '%${msg}%' OR ctime LIKE '%${msg}%'
+    </select>
+
+
 </mapper>

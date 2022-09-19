@@ -1,11 +1,10 @@
 package cn.edu.guet.xiaomimall.controller;
 
+import cn.edu.guet.xiaomimall.bean.product;
 import cn.edu.guet.xiaomimall.bean.shopingcar;
 import cn.edu.guet.xiaomimall.service.shopcarservice;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,6 +23,7 @@ public class shopcarcontroller {
 
     @RequestMapping("/addshoping")
     public String addshop(@RequestBody shopingcar shopingcar){
+        shopingcar.setNum(1);
         int add = shopcarservice.addshopcar(shopingcar);
         if (add>0){
             return "添加成功";
@@ -46,5 +46,16 @@ public class shopcarcontroller {
             return "结算失败";
         }
     }
+
+    @GetMapping("/deletebyidshop")
+    public String deletebyidshop(@RequestParam int id){
+         int del = shopcarservice.deletebyid(id);
+        if (del>0){
+            return "已移除购物车";
+        }else {
+            return "移除失败";
+        }
+    }
+
 
 }

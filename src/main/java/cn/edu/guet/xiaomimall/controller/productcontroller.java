@@ -24,9 +24,9 @@ public class productcontroller {
     @Autowired
     private productservice productservice;
 
-    @GetMapping("/selectallp")  //查询全部
-    public List<product> selectallp(){
-        List<product> selectap = productservice.selectall();
+    @RequestMapping("/selectallp")  //查询全部
+    public List<product> selectallp(@RequestParam int currentPage,@RequestParam int pageSize){
+        List<product> selectap = productservice.selectall((currentPage-1)*pageSize,pageSize);
         return selectap;
     }
 
@@ -36,9 +36,9 @@ public class productcontroller {
         return HttpResult.ok(selectbyid);
     }
 
-    @GetMapping("/selectvague")
-    public List<product> selectvague(String msg){
-        List<product> selectvague = productservice.selectvague(msg);
+    @RequestMapping("/selectvague")
+    public List<product> selectvague(@RequestParam String msg,@RequestParam int currentPage,@RequestParam int pageSize){
+        List<product> selectvague = productservice.selectvague(msg,(currentPage-1)*pageSize,pageSize);
         return selectvague;
     }
 
@@ -74,13 +74,22 @@ public class productcontroller {
 
     @PostMapping("/addproduct")
     public String addproduct(@RequestBody product product){
-        int addproduct= productservice.addproduct(product);
-        System.out.println(product);
-        if (addproduct>0){
-            return "添加成功";
+        String number = String.valueOf(System.currentTimeMillis());
+        String name = product.getName();
+        product.setNumber(number);
+        List<product> p1= productservice.selectrepeat(name);
+        System.out.println(name);
+        if (p1.size()!=0){
+            return "商品已存在，请勿重复添加";
         }else {
-            return "添加失败";
+            int addproduct= productservice.addproduct(product);
+            if (addproduct>0){
+                return "添加成功";
+            }else {
+                return "添加失败";
+            }
         }
+
     }
 
     @GetMapping("/selectphoneten")
@@ -89,4 +98,40 @@ public class productcontroller {
         return selectrandom;
     }
 
+    @PostMapping("/updataproduct")
+    public String updataproduct(@RequestBody product product){
+        int addproduct= productservice.updatapro(product);
+        if (addproduct>0){
+            return "修改成功";
+        }else {
+            return "修改失败";
+        }
+    }
+
+    @RequestMapping("/delpro")
+    public String delpro(@RequestBody int id){
+        System.out.println("山粗"+id);
+        int delpro = productservice.delpro(id);
+        if (delpro>0){
+            return "删除成功";
+        }else {
+            return "删除失败";
+        }
+    }
+
+    @GetMapping("/selecteproca")
+    public List<product> selecteproca(@RequestParam String category){
+        List<product> selectrandom = productservice.selecteproca(category);
+        return selectrandom;
+    }
+
+    @RequestMapping("/totalpro")
+    public int totalpro(){
+        return productservice.totalorlist();
+    }
+
+    @RequestMapping("/totalprovague")
+    public int totalprovague(@RequestParam String msg){
+        return productservice.selectvaguetotal(msg);
+    }
 }

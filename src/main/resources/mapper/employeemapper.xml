@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.guet.xiaomimall.mapper.employeemapper">
+
+    <insert id="addemployee">
+        INSERT INTO employee(number,name,phone,gender,identity,position,state,remark) VALUE(#{number},#{name},#{phone},#{gender},#{identity},#{position},#{state},#{remark})
+    </insert>
+    <update id="updataemp">
+        update employee set name=#{name},phone=#{phone},position=#{position},state=#{state},remark=#{remark} WHERE table_id=#{table_id}
+    </update>
+    <select id="selectrepeat" resultType="cn.edu.guet.xiaomimall.bean.employee">
+        select * from employee where name=#{name}
+    </select>
+    <select id="selectemployee" resultType="cn.edu.guet.xiaomimall.bean.employee">
+        select * from employee LIMIT #{curPage},#{pageSize}
+    </select>
+    <select id="totalorlist" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM employee
+    </select>
+    <select id="selectbyid" resultType="cn.edu.guet.xiaomimall.bean.employee">
+        select * from employee where table_id=#{table_id}
+    </select>
+    <select id="selectvague" resultType="cn.edu.guet.xiaomimall.bean.employee">
+        SELECT * FROM employee WHERE table_id LIKE '%${msg}%' OR name LIKE '%${msg}%' OR number LIKE '%${msg}%' OR gender LIKE '%${msg}%' OR identity LIKE '%${msg}%' OR position LIKE '%${msg}%' OR state LIKE '%${msg}%' LIMIT #{curPage},#{pageSize}
+    </select>
+    <select id="selectvaguetotal" resultType="java.lang.Integer">
+        select count(*) from employee where table_id LIKE '%${msg}%' OR name LIKE '%${msg}%' OR number LIKE '%${msg}%' OR gender LIKE '%${msg}%' OR identity LIKE '%${msg}%' OR position LIKE '%${msg}%' OR state LIKE '%${msg}%'
+    </select>
+</mapper>

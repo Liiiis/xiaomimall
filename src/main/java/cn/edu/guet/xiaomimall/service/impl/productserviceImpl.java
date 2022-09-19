@@ -22,8 +22,8 @@ public class productserviceImpl implements productservice {
     private productmapper productmapper;
 
     @Override
-    public List<product> selectall() {
-        List<product> allp = productmapper.selectall();
+    public List<product> selectall(int curPage,int pageSize) {
+        List<product> allp = productmapper.selectall(curPage,pageSize);
         return allp;
     }
 
@@ -34,8 +34,8 @@ public class productserviceImpl implements productservice {
     }
 
     @Override
-    public List<product> selectvague(String msg) {
-        List<product> selectvague = productmapper.selectvague(msg);
+    public List<product> selectvague(String msg,int curPage,int pageSize) {
+        List<product> selectvague = productmapper.selectvague(msg,curPage,pageSize);
         return selectvague;
     }
 
@@ -54,6 +54,36 @@ public class productserviceImpl implements productservice {
     @Override
     public int updata(String name, int num) {
         return productmapper.updata(name,num);
+    }
+
+    @Override
+    public int updatapro(product product) {
+        return productmapper.updatapro(product);
+    }
+
+    @Override
+    public int delpro(int id) {
+        return productmapper.delpro(id);
+    }
+
+    @Override
+    public List<product> selectrepeat(String name) {
+        return productmapper.selectrepeat(name);
+    }
+
+    @Override
+    public List<product> selecteproca(String category) {
+        return productmapper.selecteproca(category);
+    }
+
+    @Override
+    public int totalorlist() {
+        return productmapper.totalorlist();
+    }
+
+    @Override
+    public int selectvaguetotal(String msg) {
+        return productmapper.selectvaguetotal(msg);
     }
 
 

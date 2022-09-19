@@ -14,38 +14,31 @@ public class shopingcar {
     private int num;
     private String path;
     private String category;//类别
+    private boolean checked;
 
     public shopingcar() {
     }
 
-    public shopingcar(int id, String name, double price, int num, String path) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.num = num;
-        this.path = path;
-    }
-
-    public shopingcar(String name, double price, int num, String path, String category) {
-        this.name = name;
-        this.price = price;
-        this.num = num;
-        this.path = path;
-        this.category = category;
-    }
-
-    public shopingcar(int id, String name, double price, int num, String path, String category) {
+    public shopingcar(int id, String name, double price, int num, String path, String category, boolean checked) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.num = num;
         this.path = path;
         this.category = category;
+        this.checked = checked;
     }
 
     public shopingcar(shopingcar shopingcar) {
     }
 
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
 
     public String getCategory() {
         return category;

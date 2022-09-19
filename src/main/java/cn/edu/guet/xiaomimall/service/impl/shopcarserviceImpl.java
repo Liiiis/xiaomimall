@@ -35,4 +35,9 @@ public class shopcarserviceImpl implements shopcarservice {
     public int delete() {
         return shopingcarmapper.delete();
     }
+
+    @Override
+    public int deletebyid(int id) {
+        return shopingcarmapper.deletebyid(id);
+    }
 }

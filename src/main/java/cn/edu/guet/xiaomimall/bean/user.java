@@ -1,6 +1,6 @@
 package cn.edu.guet.xiaomimall.bean;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,32 +14,18 @@ public class user {
     private String name;
     private String phone;
     private String email;
-    private String sex;
+    private String address;
     private Date ctime;
     private Date uptime;
 
-    public user(int id, String name, String phone, String email, String sex, Date ctime, Date uptime) {
+    public user(int id, String name, String phone, String email, String address, Date ctime, Date uptime) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.sex = sex;
+        this.address = address;
         this.ctime = ctime;
         this.uptime = uptime;
-    }
-
-    public user(String name, String phone, String email, String sex) {
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.sex = sex;
-    }
-
-    public user(int id, String name, String phone, String email) {
-        this.id = id;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
     }
 
     public user() {
@@ -77,12 +63,12 @@ public class user {
         this.email = email;
     }
 
-    public String getSex() {
-        return sex;
+    public String getAddress() {
+        return address;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Date getCtime() {
@@ -108,7 +94,7 @@ public class user {
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
-                ", sex='" + sex + '\'' +
+                ", address='" + address + '\'' +
                 ", ctime=" + ctime +
                 ", uptime=" + uptime +
                 '}';

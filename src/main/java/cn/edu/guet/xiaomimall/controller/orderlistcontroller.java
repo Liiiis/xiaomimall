@@ -1,5 +1,7 @@
 package cn.edu.guet.xiaomimall.controller;
 
+import cn.edu.guet.xiaomimall.bean.catge;
+import cn.edu.guet.xiaomimall.bean.datasale;
 import cn.edu.guet.xiaomimall.bean.orderlist;
 import cn.edu.guet.xiaomimall.bean.shopingcar;
 import cn.edu.guet.xiaomimall.service.orderlistservice;
@@ -55,22 +57,79 @@ public class orderlistcontroller {
 
         Map<String, Integer> nameAndAgeList = list.stream().collect(Collectors.toMap(shopingcar::getName, shopingcar::getNum));
         for (Map.Entry<String, Integer> map:nameAndAgeList.entrySet()) {
-            productservice.updata(map.getKey(),map.getValue());
+            productservice.updata(map.getKey(),map.getValue()); //减去商品库存
         }
 
         Map<Integer,String> orderpro = list.stream().collect(Collectors.toMap(shopingcar::getId, shopingcar::getCategory));
         for (Map.Entry<Integer,String> map:orderpro.entrySet()) {
-            orderproservice.addorderpro(ordernumber,map.getKey(),map.getValue());
+            orderproservice.addorderpro(ordernumber,map.getKey(),map.getValue());  //添加关系表
         }
 
             orderlist.setOrdernumber(ordernumber);
             orderlist.setSumPrice(totalPrice);
             orderlist.setShoppingcar(b);
-        int a = orderlistservice.addorder(orderlist);
+        int a = orderlistservice.addorder(orderlist);  //订单
         if (a>0){
             return "已成功下单";
         }else{
             return "下单失败";
         }
     }
+
+    @RequestMapping("/selectsumPrice")
+    public List<datasale> selectsumPrice(){
+        return orderlistservice.selectsumPrice();
+    }
+
+    @RequestMapping("/selectallorlist")
+    public List<orderlist> selectallorlist(){
+        return orderlistservice.seleceorderlist();
+    }
+
+    @RequestMapping("/selectbyidorder")
+    public orderlist selectbyidorder(int id){
+        return orderlistservice.selectbyidorder(id);
+    }
+
+    @RequestMapping("/updataorder")
+    public String updataorder(@RequestBody orderlist orderlist){
+        int a = orderlistservice.updataorder(orderlist);
+        if (a>0){
+            return "修改成功";
+        }else {
+            return "修改失败";
+        }
+    }
+
+    @RequestMapping("/selectordervague")
+    public List<orderlist> selectordervague(@RequestParam String msg,@RequestParam int currentPage,@RequestParam int pageSize){
+        return orderlistservice.selectvague(msg,(currentPage-1)*pageSize,pageSize);
+    }
+
+    @RequestMapping("/delorderlist")
+    public String delorderlist(@RequestBody String ordernumber){
+        int del = orderlistservice.delorder(ordernumber);
+        if (del>0){
+            int a = orderproservice.delorpro(ordernumber);
+                return "退款成功";
+        }else {
+            return "退款失败";
+        }
+    }
+
+    @RequestMapping("/getpageorderlist") //分页查询
+    public List<orderlist> getpageorderlist(@RequestParam int currentPage, @RequestParam int pageSize){
+        return orderlistservice.getpageorderlist((currentPage-1)*pageSize,pageSize);
+    }
+
+    @RequestMapping("/getalltotal")
+    public int alltotal(){
+        return orderlistservice.totalorlist();
+    }
+
+    @RequestMapping("/selectvaguetotal")
+    public int selectvaguetotal(@RequestParam String msg){
+        return orderlistservice.selectvaguetotal(msg);
+    }
+
 }

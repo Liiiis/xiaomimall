@@ -21,4 +21,6 @@ public interface usermapper {
     List<user> selectvague(String msg);
     int updata(user user);
     int deluser(int id);
+    /** 分页 */
+    List<user> getAllUserByPage();
 }

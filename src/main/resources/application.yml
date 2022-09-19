@@ -11,5 +11,3 @@ server:
 mybatis:
   # 指定 mapper.xml 的位置
   mapper-locations: classpath:mapper/*.xml
-
-

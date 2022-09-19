@@ -5,4 +5,17 @@
     <insert id="addorderpro">
         INSERT INTO order_pro(orderid,pid,category) VALUE(#{orderid},#{pid},#{category})
     </insert>
+    <delete id="delorpro">
+        DELETE FROM order_pro WHERE orderid=#{orderid}
+    </delete>
+    <select id="select" resultType="java.lang.Integer">
+        select count(*) as geshu FROM order_pro group by category;
+    </select>
+    <select id="selececateory" resultType="java.lang.String">
+        select category FROM order_pro group by category;
+    </select>
+    <select id="seletebing" resultType="cn.edu.guet.xiaomimall.bean.catge">
+        select count(*) as value,category as name from order_pro group by category
+    </select>
+
 </mapper>

@@ -7,18 +7,34 @@
     <update id="updata">
         UPDATE eproducts SET stock = (stock-#{num})  WHERE name=#{name}
     </update>
-
-
+    <update id="updatapro">
+        UPDATE eproducts SET name=#{name},price=#{price},cost=#{cost},stock=(stock+#{stock}),status=#{status},category=#{category}  WHERE id=#{id}
+    </update>
+    <delete id="delpro">
+        DELETE FROM eproducts WHERE id=#{id}
+    </delete>
     <select id="selectall" resultType="cn.edu.guet.xiaomimall.bean.product">
-        select * from eproducts
+        select * from eproducts LIMIT #{curPage},#{pageSize}
     </select>
     <select id="selectbyid" resultType="cn.edu.guet.xiaomimall.bean.product">
         select * from eproducts where id=#{id}
     </select>
     <select id="selectvague" resultType="cn.edu.guet.xiaomimall.bean.product">
-        SELECT * FROM eproducts WHERE id LIKE '%${msg}%' OR name LIKE '%${msg}%' OR price LIKE '%${msg}%' OR cost LIKE '%${msg}%' OR status LIKE '%${msg}%' OR category LIKE '%${msg}%'
+        SELECT * FROM eproducts WHERE id LIKE '%${msg}%' OR name LIKE '%${msg}%' OR price LIKE '%${msg}%' OR cost LIKE '%${msg}%' OR status LIKE '%${msg}%' OR category LIKE '%${msg}%' LIMIT #{curPage},#{pageSize}
     </select>
     <select id="selectrandom" resultType="cn.edu.guet.xiaomimall.bean.product">
         SELECT * FROM eproducts where category=#{category} ORDER BY RAND() LIMIT 10  ;
+    </select>
+    <select id="selectrepeat" resultType="cn.edu.guet.xiaomimall.bean.product">
+        select * from eproducts where name=#{name}
+    </select>
+    <select id="selecteproca" resultType="cn.edu.guet.xiaomimall.bean.product">
+        SELECT * FROM eproducts where category=#{category}
+    </select>
+    <select id="totalorlist" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM eproducts
+    </select>
+    <select id="selectvaguetotal" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM eproducts WHERE id LIKE '%${msg}%' OR name LIKE '%${msg}%' OR price LIKE '%${msg}%' OR cost LIKE '%${msg}%' OR status LIKE '%${msg}%' OR category LIKE '%${msg}%'
     </select>
 </mapper>

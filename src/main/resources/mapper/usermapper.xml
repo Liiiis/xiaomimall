@@ -3,7 +3,7 @@
 <mapper namespace="cn.edu.guet.xiaomimall.mapper.usermapper">
 
     <insert id="adduser">
-        INSERT INTO user(name,phone,email,sex) VALUE(#{name},#{phone},#{email},#{sex})
+        INSERT INTO user(name,phone,email,address) VALUE(#{name},#{phone},#{email},#{address})
     </insert>
     <update id="updata">
         UPDATE user SET name=#{name},phone=#{phone},email=#{email} WHERE id=#{id}
@@ -18,6 +18,9 @@
         select * from user where id=#{id}
     </select>
     <select id="selectvague" resultType="cn.edu.guet.xiaomimall.bean.user">
-        SELECT * FROM user WHERE id LIKE '%${msg}%' OR name LIKE '%${msg}%' OR phone LIKE '%${msg}%' OR email LIKE '%${msg}%' OR sex LIKE '%${msg}%'
+        SELECT * FROM user WHERE id LIKE '%${msg}%' OR name LIKE '%${msg}%' OR phone LIKE '%${msg}%' OR email LIKE '%${msg}%' OR address LIKE '%${msg}%'
+    </select>
+    <select id="getAllUserByPage" resultType="cn.edu.guet.xiaomimall.bean.user">
+
     </select>
 </mapper>
