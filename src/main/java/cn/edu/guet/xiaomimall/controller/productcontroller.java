@@ -42,7 +42,7 @@ public class productcontroller {
         return selectvague;
     }
 
-    @PostMapping("/uploadimg")
+    @RequestMapping("/uploadimg")
     public String uploadFile(@RequestParam("file") MultipartFile file) {
         System.out.println("file:" + file.getOriginalFilename());
         // 判断文件是否为空
